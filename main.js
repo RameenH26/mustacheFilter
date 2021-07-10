@@ -1,5 +1,5 @@
 function preload() {
-
+ mustache = loadImage("https://i.postimg.cc/yNNZXts3/Untitled.png");
 }
  function setup() {
      canvas = createCanvas(300, 300);
@@ -13,6 +13,7 @@ function preload() {
 }
  function draw() {
     image(video, 0 ,0, 300, 300);
+    image(mustache, underNoseX - 50, underNoseY - 29, 100, 100);
  }
 
  function take_snapshot() {
@@ -21,10 +22,15 @@ function preload() {
  function modelLoaded() {
     console.log('PoseNet is initialized');
 }
+underNoseX = 0;
+underNoseY = 0;
+
 function gotPoses(results) {
     if(results.length > 0) {
         console.log(results);
-        console.log("underNose x =" + results[0].pose.nose.x);
-        console.log("underNose y =" + results[0].pose.nose.y);
+        underNoseX = results[0].pose.nose.x;
+        underNoseY = results[0].pose.nose.y;
+        console.log("underNose x = " + underNoseX);
+        console.log("underNose y = " + underNoseY);
     }
 }
